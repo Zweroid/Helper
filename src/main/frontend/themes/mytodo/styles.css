@@ -1,0 +1,35 @@
+body{
+    background-color: #272929;
+    color: white;
+    font-family: 'MyCustomFont', normal;
+    font-weight: 400; /* ������ ����� */
+    font-size:13px;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('icons/fonts/Disket-Mono-Regular.ttf') format('truetype');
+}
+/* Для мобильных устройств */
+@media (max-width: 600px) {
+    .my-component {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 601px) and (max-width: 900px) {
+    .my-component {
+        font-size: 18px;
+        padding: 20px;
+    }
+}
+
+/* Для десктопов */
+@media (min-width: 901px) {
+    .my-component {
+        font-size: 22px;
+        padding: 30px;
+    }
+}
