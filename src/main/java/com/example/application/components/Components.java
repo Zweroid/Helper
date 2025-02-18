@@ -2,8 +2,10 @@ package com.example.application.components;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.server.StreamResource;
 
 public class Components {
 
@@ -11,10 +13,26 @@ public class Components {
 
     public Div widthLayouts() { //TODO Test git
         Div divNew = new Div();
-        divNew.setText("Привет всем это HeplMax сегожня мы будем устанавлиавть прилодения на ваш телевизор, сразу хочу сказать что вы будете делать это сами без посторонней помощи");
+        divNew.setText("проверка шрифтов");
         divNew.setClassName("my-component");
 
 
         return divNew;
     }
+
+    public Image logotipSite () {
+        StreamResource imageResource = new StreamResource("logo.png",
+                () -> getClass().getResourceAsStream("/images/logo.png"));
+        Image image = new Image(imageResource, "My Streamed Image");
+        image.setHeight("50px");
+        image.setWidth("50px");
+
+
+
+
+        return image;
+    }
+
+
+
 }

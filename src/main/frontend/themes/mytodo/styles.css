@@ -1,7 +1,7 @@
 body{
     background-color: #272929;
-    color: white;
-    font-family: 'MyCustomFont', normal;
+    color: #ffffff;
+    font-family: 'MyCustomFont1', normal;
     font-weight: 400; /* ������ ����� */
     font-size:13px;
 }
@@ -9,6 +9,11 @@ body{
 @font-face {
     font-family: 'MyCustomFont';
     src: url('icons/fonts/Disket-Mono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MyCustomFont1';
+    src: url('icons/fonts/LTSuperior-Regular.otf') format('opentype');
 }
 /* Для мобильных устройств */
 @media (max-width: 600px) {
@@ -32,4 +37,17 @@ body{
         font-size: 22px;
         padding: 30px;
     }
+}
+
+vaadin-app-layout::part(navbar){
+ background-color: #272929;
+color:#AFB1B3;
+
+}
+
+h3{
+color:#AFB1B3;
+    font-family: 'MyCustomFont', normal;
+    font-weight: 400; /* ������ ����� */
+    font-size:22px;
 }
