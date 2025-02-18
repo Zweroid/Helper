@@ -9,7 +9,7 @@ public class Components {
 
 
 
-    public Div widthLayouts() {
+    public Div widthLayouts() { //TODO Test git
         Div divNew = new Div();
         divNew.setText("Привет всем это HeplMax сегожня мы будем устанавлиавть прилодения на ваш телевизор, сразу хочу сказать что вы будете делать это сами без посторонней помощи");
         divNew.setClassName("my-component");
