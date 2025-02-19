@@ -11,7 +11,7 @@ public class Components {
 
 
 
-    public Div widthLayouts() { //TODO Test git
+    public Div widthLayouts() {
         Div divNew = new Div();
         divNew.setText("проверка шрифтов");
         divNew.setClassName("my-component");
