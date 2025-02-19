@@ -83,6 +83,4 @@ public class Components {
         status.setVisible(true);
     }
 
-
-
 }
