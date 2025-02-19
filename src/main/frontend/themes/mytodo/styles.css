@@ -1,20 +1,4 @@
-body{
-    background-color: #272a2c;
-    color: #ffffff;
-    font-family: 'MyCustomFont1', normal;
-    font-weight: 400;
-    font-size:13px;
-}
 
-@font-face {
-    font-family: 'MyCustomFont';
-    src: url('icons/fonts/Lilita One Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'MyCustomFont1';
-    src: url('icons/fonts/LTSuperior-Regular.otf') format('opentype');
-}
 /* Для мобильных устройств */
 @media (max-width: 600px) {
     .my-component {
@@ -97,4 +81,20 @@ vaadin-button[slot="cancel-button"] {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+body{
+    background-color: #272a2c;
+    color: #ffffff;
+
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/Lilita One Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MyCustomFont1';
+    src: url('fonts/LTSuperior.otf') format('opentype');
 }

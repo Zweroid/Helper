@@ -12,12 +12,16 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.spring.security.AuthenticationContext;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("HelpMax")
-@Route("presentUser")
+@Route("")
+@PermitAll
 public class HomeView extends AppLayout {
-    Components components = new Components();
 
+    Components components = new Components();
 
     public HomeView() {
         addToNavbar(components.logotipSite());
