@@ -23,7 +23,7 @@ public class HomeView extends AppLayout {
 
 
     public HomeView() {
-     addToNavbar(components.logotipSite(),new H3("Help Max"));
+     addToNavbar(components.logotipSite());
      setClassName("navbar");
 
 //        setJustifyContentMode(JustifyContentMode.CENTER);

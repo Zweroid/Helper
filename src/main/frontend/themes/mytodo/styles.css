@@ -2,13 +2,13 @@ body{
     background-color: #272a2c;
     color: #ffffff;
     font-family: 'MyCustomFont1', normal;
-    font-weight: 400; /* ������ ����� */
+    font-weight: 400;
     font-size:13px;
 }
 
 @font-face {
     font-family: 'MyCustomFont';
-    src: url('icons/fonts/Disket-Mono-Regular.ttf') format('truetype');
+    src: url('icons/fonts/Lilita One Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -43,11 +43,4 @@ vaadin-app-layout::part(navbar){
  background-color: #272929;
 color:#AFB1B3;
 
-}
-
-h3{
-color:#AFB1B3;
-    font-family: 'MyCustomFont', normal;
-    font-weight: 400; /* ������ ����� */
-    font-size:22px;
 }

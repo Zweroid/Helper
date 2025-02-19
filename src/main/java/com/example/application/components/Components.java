@@ -21,15 +21,11 @@ public class Components {
     }
 
     public Image logotipSite () {
-        StreamResource imageResource = new StreamResource("logo.png",
-                () -> getClass().getResourceAsStream("/images/logo.png"));
+        StreamResource imageResource = new StreamResource("Emblems.png",
+                () -> getClass().getResourceAsStream("/images/Emblems.png"));
         Image image = new Image(imageResource, "My Streamed Image");
-        image.setHeight("50px");
-        image.setWidth("50px");
-
-
-
-
+        image.setHeight("81px");
+        image.setWidth("150px");
         return image;
     }
 
