@@ -8,15 +8,16 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("HelpMax")
 @Route("")
 public class HomeView extends AppLayout {
-
-
     Components components = new Components();
+
+
 
 
 
@@ -26,13 +27,15 @@ public class HomeView extends AppLayout {
      addToNavbar(components.logotipSite());
      setClassName("navbar");
 
+
+     setContent(components.agreement());
+
 //        setJustifyContentMode(JustifyContentMode.CENTER);
 //        setAlignItems(Alignment.CENTER);
 //        setWidthFull(); // Занимаем всю доступную ширину
 //        setHeightFull();
 //
 //        add(components.widthLayouts());
-
     }
 
 }
