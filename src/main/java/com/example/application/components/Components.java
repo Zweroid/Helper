@@ -42,6 +42,7 @@ public class Components {
         status = new Span();
         status.setVisible(false);
         ConfirmDialog dialog = new ConfirmDialog();
+        dialog.setClassName("confirm-dialog");
         dialog.setHeader("Важное предупреждение");
         Html content = new Html("""
             <div>
@@ -59,7 +60,7 @@ public class Components {
                 </ul>
                 <p>Риски при установке программного обеспечения несет ПОЛЬЗОВАТЕЛЬ. Мы не несем ответственности за возможные проблемы с устройством.</p>
                 <p>Следуя нашим инструкциям внимательно и выполняя все шаги правильно, вы сможете успешно установить приложения, и они будут работать корректно.</p>
-                <p>Нажимая "СОГЛАСЕН", вы принимаете все вышеуказанные условия.</p>
+                <p>Нажимая "Принять", вы принимаете все вышеуказанные условия.</p>
             </div>
             """);
         dialog.setText(content);
