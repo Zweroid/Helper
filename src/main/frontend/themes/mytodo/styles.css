@@ -24,8 +24,6 @@
 }
 /* цвет хидара */
 vaadin-app-layout::part(navbar){
- background-color: #272929;
-color:#AFB1B3;
 
 }
 /* диалоговое окно информация */
@@ -84,8 +82,7 @@ vaadin-button[slot="cancel-button"] {
 }
 
 body{
-    background-color: #272a2c;
-    color: #ffffff;
+
 
 }
 
@@ -101,13 +98,11 @@ body{
 
 
 
-vaadin-tab{
-  font-family: 'MyCustomFont1', normal;
-    font-weight: 400;
-      font-size:20px;
-      color: white;
+html {
+    --vaadin-app-layout-drawer-width: 180px; /* можно указать в % или px */
+
 }
 
-vaadin-tab::before{
-background-color:white;
-}
+
+
+

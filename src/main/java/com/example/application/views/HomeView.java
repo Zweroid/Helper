@@ -7,6 +7,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -38,6 +39,7 @@ public class HomeView extends AppLayout {
     public HomeView(SecurityService securityService) {
         this.securityService = securityService;
         Button logout = new Button("Выход", e -> securityService.logout());
+        logout.addThemeVariants(ButtonVariant.LUMO_SMALL);
         DrawerToggle toggle = new DrawerToggle();
         SideNav nav = getSideNav();
 
@@ -61,8 +63,7 @@ public class HomeView extends AppLayout {
     private SideNav getSideNav() {
         SideNav sideNav = new SideNav();
         sideNav.addItem(
-                new SideNavItem("Android TV", "/android",
-                        VaadinIcon.DASHBOARD.create()));
+                new SideNavItem("Android TV", "/android"));
         return sideNav;
     }
 
