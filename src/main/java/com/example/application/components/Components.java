@@ -31,8 +31,8 @@ public class Components {
         StreamResource imageResource = new StreamResource("Emblems.png",
                 () -> getClass().getResourceAsStream("/images/Emblems.png"));
         Image image = new Image(imageResource, "My Streamed Image");
-        image.setHeight("89px");
-        image.setWidth("165px");
+        image.setHeight("51px");
+        image.setWidth("95px");
         return image;
     }
 
