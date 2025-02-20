@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("login")
-@PageTitle("Chat Login")
+@PageTitle("Help Max")
 @AnonymousAllowed
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
@@ -25,7 +25,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
         loginForm.setAction("login");
 
-        add(new H1("Vaadin Chat"), new Div("You can log in as 'alice', 'bob' or 'admin'. The password for all of them is 'password'."), loginForm);
+        add(loginForm);
     }
 
     @Override

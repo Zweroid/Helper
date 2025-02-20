@@ -98,3 +98,16 @@ body{
     font-family: 'MyCustomFont1';
     src: url('fonts/LTSuperior.otf') format('opentype');
 }
+
+
+
+vaadin-tab{
+  font-family: 'MyCustomFont1', normal;
+    font-weight: 400;
+      font-size:20px;
+      color: white;
+}
+
+vaadin-tab::before{
+background-color:white;
+}

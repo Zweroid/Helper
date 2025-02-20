@@ -1,15 +1,18 @@
 package com.example.application.security;
 
 import com.example.application.views.login.LoginView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true)
@@ -18,19 +21,11 @@ class SecurityConfig extends VaadinWebSecurity {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         super.configure(http);
-        http.formLogin(form -> form
-                .loginPage("/login") // Страница входа
-                .defaultSuccessUrl("/home", true) // Страница после успешного входа
-                .failureUrl("/login?error=true") // Страница при ошибке входа
-        );
-
-        http.logout(logout -> logout
-                .logoutSuccessUrl("/login") // Страница после выхода
-        );
-
         setLoginView(http, LoginView.class);
     }
+
 
     @Bean
     public UserDetailsService users() {
@@ -47,11 +42,11 @@ class SecurityConfig extends VaadinWebSecurity {
                 .roles(Roles.USER)
                 .build();
         var admin = User.builder()
-                .username("admin")
+                .username("Admin")
                 // password = password with this hash, don't tell anybody :-)
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .password("{bcrypt}$2a$12$eOLfqG.0DGECd//Qcd6g8OIwiiUGiQworFydGqVS.JXJftDN9PTAG")
                 .roles(Roles.ADMIN, Roles.USER)
                 .build();
-        return new InMemoryUserDetailsManager(max);
+        return new InMemoryUserDetailsManager(max,admin);
     }
 }
