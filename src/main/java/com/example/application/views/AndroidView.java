@@ -35,11 +35,6 @@ public class AndroidView extends VerticalLayout {
     }
 
 
-
-
-
-
-
     private boolean isAgreementAccepted() {
         VaadinSession session = VaadinSession.getCurrent();
         return session.getAttribute("agreementAccepted") != null && (boolean) session.getAttribute("agreementAccepted");

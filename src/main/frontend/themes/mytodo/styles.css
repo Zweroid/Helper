@@ -38,21 +38,13 @@ box-shadow: 0px 0px 15px 12px rgba(255, 255, 255, 0.22);
 
 /* диалоговое окно информация */
 vaadin-confirm-dialog-overlay::part(header) {
-    background-color: #272a2c; /* Синий фон */
-    color: white; /* Белый текст */
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
+    font-size: 12px;
+
 }
 
 /* Стилизация содержимого информация */
 vaadin-confirm-dialog-overlay::part(content) {
-    background-color: #272a2c; /* Светлый фон */
-    font-family: 'MyCustomFont1', normal;
-    font-weight: 400;
-    font-size:13px;
-    color: white;
-    padding: 20px;
+    font-size:14px;
 
 }
 h3 {
@@ -60,25 +52,16 @@ h3 {
 }
 
 vaadin-confirm-dialog-overlay::part(footer) {
-    background-color: #272a2c;
+
 }
 
 /* Стилизация кнопки "Принять" */
 vaadin-button[slot="confirm-button"] {
-    background-color: #2ecc71; /* Зеленый цвет */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+
 }
 
 vaadin-button[slot="cancel-button"] {
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+
 }
 
 body{
