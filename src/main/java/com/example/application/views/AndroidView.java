@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.html.Span;
@@ -14,14 +15,17 @@ import jakarta.annotation.security.PermitAll;
 @PageTitle("Admin")
 @PermitAll
 public class AndroidView extends VerticalLayout {
+    private final SecurityService securityService;
     HorizontalLayout present = new HorizontalLayout();
+    SlideShowView slideShowView = new SlideShowView();
 
 
-    public AndroidView() {
+    public AndroidView(SecurityService securityService) {
+        this.securityService = securityService;
 
      add(agreement());
 
-
+     add(slideShowView);
     }
 
 
@@ -69,6 +73,10 @@ public class AndroidView extends VerticalLayout {
     }
 
     private void buttonNo(String canceled) {
+
+        securityService.logout();
+
+
     }
 
     private void buttonOk() {
