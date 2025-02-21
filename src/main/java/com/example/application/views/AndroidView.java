@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.components.UserInfoService;
 import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
@@ -21,6 +22,7 @@ import java.util.Map;
 @PageTitle("Admin")
 @PermitAll
 public class AndroidView extends VerticalLayout {
+    UserInfoService userInfoService = new UserInfoService();
     private final SecurityService securityService;
     HorizontalLayout present = new HorizontalLayout();
     SlideShowView slideShowView = new SlideShowView();
@@ -29,7 +31,8 @@ public class AndroidView extends VerticalLayout {
     public AndroidView(SecurityService securityService) {
         this.securityService = securityService;
 
-        add(agreement());
+        add(agreement(),userInfoService.userInfo());
+
 
 
     }
@@ -47,6 +50,7 @@ public class AndroidView extends VerticalLayout {
     public HorizontalLayout agreement() {
         if (isAgreementAccepted()) {
             // Если пользователь уже принял соглашение, ничего не делаем
+
             return present;
         }
 
@@ -97,17 +101,15 @@ public class AndroidView extends VerticalLayout {
 
     private void buttonOk() {
         present.setVisible(false);
-        textAgreementSucsses();
         UI.getCurrent().getPage().reload();
         present = null;
+
+
     }
 
 
-    private H5 textAgreementSucsses () {
 
-        H5 text = new H5("Соглашение приянто") ;
 
-        return text;
-    }
+
 
 }
