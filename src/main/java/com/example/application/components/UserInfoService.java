@@ -1,10 +1,7 @@
 package com.example.application.components;
 
-import com.example.application.views.HomeView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.router.Route;
-import jakarta.annotation.security.PermitAll;
 
 
 public class UserInfoService extends VerticalLayout {
