@@ -68,13 +68,20 @@ public class HomeView extends AppLayout {
     }
 
 
+
+
     private SideNav getSideNav(AuthenticationContext authenticationContext) {
         SideNav sideNav = new SideNav();
+
         if (authenticationContext.hasRole(Roles.ADMIN)) {
-            sideNav.addItem(
+
+            sideNav.setLabel("Админ");
+            sideNav.setCollapsible(true);
+            sideNav.addItem(new SideNavItem("Страница Welcome",
+                    "/serviseAdminWelcomePageAndroid"),
                     new SideNavItem("Android TV", "/android"),
-                    new SideNavItem("Установка Windows","/osWindows"),
-                    new SideNavItem("Admin","/generalAdmin"));
+                    new SideNavItem("Установка Windows","/osWindows"));
+
 
         }else {
 
