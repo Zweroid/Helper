@@ -8,7 +8,9 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.H6;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
@@ -16,6 +18,7 @@ import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
@@ -30,10 +33,11 @@ public class HomeView extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();
     H6 agreementText = new H6("Соглашение принято");
     HorizontalLayout present = new HorizontalLayout();
+    Button checkDeviceButton = new Button("Проверить устройство", event -> chekAndroid());
 
 
     public HomeView(SecurityService securityService) {
-
+        checkDeviceButton.addThemeVariants(ButtonVariant.LUMO_SMALL);
         agreementText.setVisible(false);
         this.securityService = securityService;
         Button logout = new Button("Выход", e -> securityService.logout());
@@ -45,7 +49,7 @@ public class HomeView extends AppLayout {
         header.setWidth("100%");
         header.setAlignItems(FlexComponent.Alignment.CENTER);
         header.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.add(toggle, components.logotipSite(), logout, agreementText);
+        header.add(toggle, components.logotipSite(), logout, agreementText,checkDeviceButton);
         addToNavbar(header);
         addToDrawer(scroller);
         setContent(agreement());
@@ -140,6 +144,31 @@ public class HomeView extends AppLayout {
         agreementText.addClassNames("text-success", "m-t-s");
         agreementText.setVisible(true);
 
+    }
+
+    private void chekAndroid() {
+        String userAgent = getAndroidVersionFromUserAgent();
+        if (userAgent != null && !userAgent.isEmpty()) {
+
+            Notification.show("Это Android устройство. Версия: " + userAgent).setPosition(Notification.Position.BOTTOM_CENTER);
+
+        } else {
+
+            Notification.show("Это не Android устройство").setPosition(Notification.Position.BOTTOM_CENTER);;
+        }
+    }
+
+    private String getAndroidVersionFromUserAgent() {
+        VaadinRequest request = VaadinRequest.getCurrent();
+        if (request != null) {
+            String userAgent = request.getHeader("User-Agent");
+
+            System.out.println(userAgent);
+            if (userAgent != null && userAgent.contains("Android")) {
+                return userAgent.split("Android ")[1].split(" ")[0]; // Возвращает версию Android
+            }
+        }
+        return "";
     }
 
 }

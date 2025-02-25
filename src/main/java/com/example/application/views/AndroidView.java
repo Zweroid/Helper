@@ -6,10 +6,8 @@ import com.example.application.databaseService.PresentInfoToJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H5;
-import com.vaadin.flow.component.html.H6;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -17,6 +15,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.VaadinRequest;
 import jakarta.annotation.security.PermitAll;
 
 import java.io.File;
@@ -40,6 +39,11 @@ public class AndroidView extends VerticalLayout {
 
     public AndroidView() {
         System.out.println(json);
+
+
+
+
+
         try {
             // Парсим JSON в список объектов SceneInfoView.Scene
             List<SceneInfoView> scenes = objectMapper.readValue(json, new TypeReference<List<SceneInfoView>>() {
@@ -65,6 +69,8 @@ public class AndroidView extends VerticalLayout {
             System.err.println("Ошибка при парсинге JSON: " + e.getMessage());
             throw new RuntimeException("Не удалось загрузить данные из JSON", e);
         }
+
+
 
     }
 
@@ -176,5 +182,7 @@ public class AndroidView extends VerticalLayout {
         // Возвращаем объект Image с указанием альтернативного текста
         return new Image(resource, "Изображение: " + file.getName());
     }
+
+
 
 }
