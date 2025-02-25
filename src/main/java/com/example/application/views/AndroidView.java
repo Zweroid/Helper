@@ -1,36 +1,30 @@
 package com.example.application.views;
 
 import com.example.application.components.SceneInfoView;
-import com.example.application.components.UserInfoService;
 import com.example.application.databaseService.PresentInfoToJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
-import com.vaadin.flow.server.VaadinRequest;
 import jakarta.annotation.security.PermitAll;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
 
 @Route(value = "android", layout = HomeView.class)
-@PageTitle("Admin")
+@PageTitle("HelpMax")
 @PermitAll
 public class AndroidView extends VerticalLayout {
 
     private PresentInfoToJson infoToJson = new PresentInfoToJson();
 
-    UserInfoService userInfoService = new UserInfoService();
     SlideShowView slideShowView = new SlideShowView();
     private String json = infoToJson.getDatabaseAsJson();
     // Создаем ObjectMapper для парсинга JSON
@@ -39,10 +33,6 @@ public class AndroidView extends VerticalLayout {
 
     public AndroidView() {
         System.out.println(json);
-
-
-
-
 
         try {
             // Парсим JSON в список объектов SceneInfoView.Scene
@@ -94,10 +84,6 @@ public class AndroidView extends VerticalLayout {
         general.add(title,component);
         verticalLayout.add(general);
 
-
-
-
-
         return verticalLayout;
     }
 
@@ -126,11 +112,6 @@ public class AndroidView extends VerticalLayout {
         scroller.setWidth("100%");
 
 
-
-
-
-
-
         for (String photoPath : sceneInfoView.getPhotos()) {
             try {
                 // Создаем изображение с помощью метода createImageFromPath
@@ -144,18 +125,10 @@ public class AndroidView extends VerticalLayout {
             }
         }
 
-
-
-
-
         scroller.setContent(gallery);
-
         title.add(titleFont);
-
         component.add(scroller);
-
         general.add(title,component);
-
         verticalLayout.add(general);
 
         return verticalLayout;

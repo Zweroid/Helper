@@ -41,7 +41,7 @@ class SecurityConfig extends VaadinWebSecurity {
         var admin = User.builder()
                 .username("Admin")
                 // password = password with this hash, don't tell anybody :-)
-                .password("{bcrypt}$2a$12$eOLfqG.0DGECd//Qcd6g8OIwiiUGiQworFydGqVS.JXJftDN9PTAG")
+                .password("{bcrypt}$2a$12$6PMeoaTtc4cOJjsII3h1r.yvdlV.fwTFqnlyd4lZYyLoo6l5NeWAu")//Admin
                 .roles(Roles.ADMIN, Roles.USER)
                 .build();
         return new InMemoryUserDetailsManager(max,admin);

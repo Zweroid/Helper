@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.components.LogotipSite;
+import com.example.application.security.Roles;
 import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -8,7 +9,6 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
-import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -20,6 +20,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
 
@@ -36,14 +37,18 @@ public class HomeView extends AppLayout {
     Button checkDeviceButton = new Button("Проверить устройство", event -> chekAndroid());
 
 
-    public HomeView(SecurityService securityService) {
+    public HomeView(SecurityService securityService,AuthenticationContext authenticationContext) {
+
+
+
+
         checkDeviceButton.addThemeVariants(ButtonVariant.LUMO_SMALL);
         agreementText.setVisible(false);
         this.securityService = securityService;
         Button logout = new Button("Выход", e -> securityService.logout());
         logout.addThemeVariants(ButtonVariant.LUMO_SMALL);
         DrawerToggle toggle = new DrawerToggle();
-        SideNav nav = getSideNav();
+        SideNav nav = getSideNav(authenticationContext);
         Scroller scroller = new Scroller(nav);
         scroller.setClassName(LumoUtility.Padding.SMALL);
         header.setWidth("100%");
@@ -54,16 +59,32 @@ public class HomeView extends AppLayout {
         addToDrawer(scroller);
         setContent(agreement());
 
+
+
+
         checkAgreementStatus();
 
 
     }
 
 
-    private SideNav getSideNav() {
+    private SideNav getSideNav(AuthenticationContext authenticationContext) {
         SideNav sideNav = new SideNav();
-        sideNav.addItem(
-                new SideNavItem("Android TV", "/android"));
+        if (authenticationContext.hasRole(Roles.ADMIN)) {
+            sideNav.addItem(
+                    new SideNavItem("Android TV", "/android"),
+                    new SideNavItem("Установка Windows","/osWindows"),
+                    new SideNavItem("Admin","/generalAdmin"));
+
+        }else {
+
+            sideNav.addItem(
+                    new SideNavItem("Android TV", "/android"),
+                    new SideNavItem("Установка Windows","/osWindows"));
+
+
+        }
+
         return sideNav;
     }
 

@@ -109,5 +109,8 @@ padding-bottom: 5px;
     background-color: #37485F; /* Опциональный фон */
     border-radius: 4px; /* Опциональные скругленные углы */
 
+}
 
+h5 {
+    color:#c9d2df;
 }
