@@ -89,3 +89,25 @@ html {
 h6{
 font-size: 8px;
 }
+
+
+.general-present {
+    width: 100%; /* Обеспечиваем, что общий контейнер занимает всю ширину */
+    display: flex;
+    flex-direction: column; /* Размещаем дочерние элементы вертикально */
+}
+
+.title-present {
+
+padding-bottom: 5px;
+
+
+}
+
+.component-present {
+    padding: 10px; /* Добавляем отступы для лучшего визуального восприятия */
+    background-color: #37485F; /* Опциональный фон */
+    border-radius: 4px; /* Опциональные скругленные углы */
+
+
+}

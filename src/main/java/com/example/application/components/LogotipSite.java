@@ -3,7 +3,7 @@ package com.example.application.components;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.server.StreamResource;
 
-public class Components {
+public class LogotipSite {
 
     //Метод который помещает на HomeView логотип на страницу
     public Image logotipSite() {

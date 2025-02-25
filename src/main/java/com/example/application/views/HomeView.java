@@ -1,6 +1,6 @@
 package com.example.application.views;
 
-import com.example.application.components.Components;
+import com.example.application.components.LogotipSite;
 import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -26,7 +26,7 @@ import jakarta.annotation.security.PermitAll;
 
 public class HomeView extends AppLayout {
     private final SecurityService securityService;
-    Components components = new Components();
+    LogotipSite components = new LogotipSite();
     HorizontalLayout header = new HorizontalLayout();
     H6 agreementText = new H6("Соглашение принято");
     HorizontalLayout present = new HorizontalLayout();
