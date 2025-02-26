@@ -25,7 +25,7 @@ public class AndroidView extends VerticalLayout {
 
     private PresentInfoToJson infoToJson = new PresentInfoToJson();
 
-    SlideShowView slideShowView = new SlideShowView();
+
     private String json = infoToJson.getDatabaseAsJson();
     // Создаем ObjectMapper для парсинга JSON
     private ObjectMapper objectMapper = new ObjectMapper();

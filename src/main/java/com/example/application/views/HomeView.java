@@ -9,6 +9,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -23,6 +24,11 @@ import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Route("")
 @PageTitle("HelpMax")
@@ -48,15 +54,22 @@ public class HomeView extends AppLayout {
         Button logout = new Button("Выход", e -> securityService.logout());
         logout.addThemeVariants(ButtonVariant.LUMO_SMALL);
         DrawerToggle toggle = new DrawerToggle();
-        SideNav nav = getSideNav(authenticationContext);
-        Scroller scroller = new Scroller(nav);
-        scroller.setClassName(LumoUtility.Padding.SMALL);
+        List<SideNav> sideNavs = getSideNav(authenticationContext);
+        Div navContainer = new Div();
+
+        for (SideNav nav : sideNavs) {
+            Scroller scroller = new Scroller(nav);
+            scroller.setClassName(LumoUtility.Padding.SMALL);
+            navContainer.add(scroller);
+        }
+
+
         header.setWidth("100%");
         header.setAlignItems(FlexComponent.Alignment.CENTER);
         header.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.add(toggle, components.logotipSite(), logout, agreementText,checkDeviceButton);
         addToNavbar(header);
-        addToDrawer(scroller);
+        addToDrawer(navContainer);
         setContent(agreement());
 
 
@@ -70,29 +83,34 @@ public class HomeView extends AppLayout {
 
 
 
-    private SideNav getSideNav(AuthenticationContext authenticationContext) {
-        SideNav sideNav = new SideNav();
+    private List<SideNav> getSideNav(AuthenticationContext authenticationContext) {
+        SideNav user = new SideNav();
+        SideNav admin = new SideNav();
 
         if (authenticationContext.hasRole(Roles.ADMIN)) {
 
-            sideNav.setLabel("Админ");
-            sideNav.setCollapsible(true);
-            sideNav.addItem(new SideNavItem("Страница Welcome",
-                    "/serviseAdminWelcomePageAndroid"),
+            user.addItem(
                     new SideNavItem("Android TV", "/android"),
                     new SideNavItem("Установка Windows","/osWindows"));
+
+            admin.setLabel("Админ");
+            admin.setCollapsible(true);
+            admin.addItem(new SideNavItem("Страница Welcome",
+                    "/serviseAdminWelcomePageAndroid"));
+
+            return Arrays.asList(user,admin);
 
 
         }else {
 
-            sideNav.addItem(
+            user.addItem(
                     new SideNavItem("Android TV", "/android"),
                     new SideNavItem("Установка Windows","/osWindows"));
 
 
         }
 
-        return sideNav;
+        return Collections.singletonList(user);
     }
 
     private void checkAgreementStatus() {

@@ -6,21 +6,24 @@ import org.json.JSONObject;
 import java.sql.*;
 
 public class PresentInfoToJson {
-    private String url = "jdbc:sqlite:C:/helper/helper.db";
-
     public PresentInfoToJson() {
 
     }
 
     public String getDatabaseAsJson() {
         JSONArray resultJsonArray = new JSONArray();
+        Connection conn = null;
+        PreparedStatement pstmtUserInfo = null;
+        ResultSet rsUserInfo = null;
 
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try {
+            // Получаем соединение через DatabaseHelper
+            conn = DatabaseHelper.connect();
             if (conn != null) {
                 // SQL-запрос для выборки всех записей из таблицы user_info
                 String sqlUserInfo = "SELECT id, scene_number, scene_name, title, content FROM user_info";
-                PreparedStatement pstmtUserInfo = conn.prepareStatement(sqlUserInfo);
-                ResultSet rsUserInfo = pstmtUserInfo.executeQuery();
+                pstmtUserInfo = conn.prepareStatement(sqlUserInfo);
+                rsUserInfo = pstmtUserInfo.executeQuery();
 
                 while (rsUserInfo.next()) {
                     int id = rsUserInfo.getInt("id");
@@ -56,11 +59,17 @@ public class PresentInfoToJson {
 
                     // Добавляем объект сцены в общий массив JSON
                     resultJsonArray.put(userInfoObject);
+
+                    // Закрываем ресурсы для запроса фото
+                    DatabaseHelper.close(null, pstmtPhotos, rsPhotos);
                 }
             }
         } catch (SQLException e) {
             System.err.println("Ошибка при работе с базой данных: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            // Закрываем все ресурсы
+            DatabaseHelper.close(conn, pstmtUserInfo, rsUserInfo);
         }
 
         // Возвращаем JSON-результат как строку

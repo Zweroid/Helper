@@ -82,7 +82,7 @@ body{
 
 
 html {
-    --vaadin-app-layout-drawer-width: 180px; /* можно указать в % или px */
+    --vaadin-app-layout-drawer-width: 200px; /* можно указать в % или px */
 
 }
 
