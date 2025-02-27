@@ -1,4 +1,5 @@
 package com.example.application.databaseService;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 import java.sql.Connection;
@@ -21,7 +22,9 @@ public class CrudWelcomeAndroid {
             pstmt.setString(3, title);
             pstmt.setString(4, content);
             pstmt.executeUpdate();
+            Notification.show("Вы успешно дабавили запись в базу данных").setPosition(Notification.Position.TOP_CENTER);
             return true;
+
         } catch (SQLException e) {
             System.out.println("Ошибка при добавлении записи в user_info: " + e.getMessage());
             return false;
