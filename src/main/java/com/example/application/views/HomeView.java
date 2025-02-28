@@ -84,33 +84,44 @@ public class HomeView extends AppLayout {
 
 
     private List<SideNav> getSideNav(AuthenticationContext authenticationContext) {
-        SideNav user = new SideNav();
+        SideNav userAndroid = new SideNav();
+        SideNav userPC = new SideNav();
         SideNav admin = new SideNav();
 
         if (authenticationContext.hasRole(Roles.ADMIN)) {
 
-            user.addItem(
-                    new SideNavItem("Android TV", "/android"),
-                    new SideNavItem("Установка Windows","/osWindows"));
+            userAndroid.setLabel("Android TV");
+            userAndroid.setCollapsible(true);
+            userAndroid.addItem(new SideNavItem("Приветствие", "/androidWelcomePage"));
+
+            userPC.setLabel("Computer");
+            userPC.setCollapsible(true);
+            userPC.addItem(new SideNavItem("Установка Windows","/osWindows"));
+
+
+
+
 
             admin.setLabel("Админ");
             admin.setCollapsible(true);
-            admin.addItem(new SideNavItem("Страница Welcome",
-                    "/serviseAdminWelcomePageAndroid"));
+            admin.addItem(new SideNavItem("Страница Welcome","/serviceWelcomeUserInfo"));
 
-            return Arrays.asList(user,admin);
+            return Arrays.asList(userAndroid,userPC,admin);
 
 
         }else {
+            userAndroid.setLabel("Android TV");
+            userAndroid.setCollapsible(true);
+            userAndroid.addItem(new SideNavItem("Приветствие", "/androidWelcomePage"));
 
-            user.addItem(
-                    new SideNavItem("Android TV", "/android"),
-                    new SideNavItem("Установка Windows","/osWindows"));
+            userPC.setLabel("Computer");
+            userPC.setCollapsible(true);
+            userPC.addItem(new SideNavItem("Установка Windows","/osWindows"));
 
 
         }
 
-        return Collections.singletonList(user);
+        return Arrays.asList(userAndroid,userPC);
     }
 
     private void checkAgreementStatus() {

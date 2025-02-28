@@ -114,3 +114,12 @@ padding-bottom: 5px;
 h5 {
     color:#c9d2df;
 }
+
+vaadin-side-nav::part(label){
+font-size: 15px;
+}
+
+vaadin-side-nav-item{
+font-size: 14px;
+
+}

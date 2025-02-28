@@ -21,9 +21,9 @@ import jakarta.annotation.security.RolesAllowed;
 import java.util.Collections;
 
 @PageTitle("HelpMax")
-@Route(value = "serviseAdminWelcomePageAndroid", layout = HomeView.class)
+@Route(value = "serviceWelcomeUserInfo", layout = HomeView.class)
 @RolesAllowed(Roles.ADMIN)
-public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
+public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     private boolean isFormEditOpen = false;
     CrudWelcomeAndroid welcomeAndroid = new CrudWelcomeAndroid();
     private final Grid<BdUserinfo> grid = new Grid<>();
@@ -53,7 +53,7 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
     //Todo слой где кнопка создать и закрыть в редактировании
     HorizontalLayout buttonDeleteCancel = new HorizontalLayout();
 
-    public ServiseAdminWelcomePageAndroid() {
+    public ServiceAdminWelcomePageAndroidUserInfo() {
         buttonLayout.add(buttonCreateButtonLayout, buttonEditButtonLayout, buttonDeleteButtonLayout);
         add(createGridUserInfo(), buttonLayout);
 

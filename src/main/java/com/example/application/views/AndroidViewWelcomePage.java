@@ -18,10 +18,10 @@ import java.io.FileInputStream;
 import java.util.List;
 
 
-@Route(value = "android", layout = HomeView.class)
+@Route(value = "androidWelcomePage", layout = HomeView.class)
 @PageTitle("HelpMax")
 @PermitAll
-public class AndroidView extends VerticalLayout {
+public class AndroidViewWelcomePage extends VerticalLayout {
 
     private PresentInfoToJson infoToJson = new PresentInfoToJson();
 
@@ -31,7 +31,7 @@ public class AndroidView extends VerticalLayout {
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public AndroidView() {
+    public AndroidViewWelcomePage() {
         System.out.println(json);
 
         try {
@@ -42,12 +42,20 @@ public class AndroidView extends VerticalLayout {
             // Создаем основной контейнер для компонентов
             VerticalLayout layout = new VerticalLayout();
 
+
+
             // Обрабатываем каждую сцену
             for (SceneInfoView scene : scenes) {
                 if ("text".equals(scene.getSceneName())) {
                     layout.add(createTextArea(scene));
+                    layout.setSpacing(false);
+                    layout.setPadding(false);
+                    layout.getThemeList().add("spacing-xs");
                 } else if ("photo".equals(scene.getSceneName())) {
                     layout.add(createPhotoGallery(scene));
+                    layout.setSpacing(false);
+                    layout.setPadding(false);
+                    layout.getThemeList().add("spacing-xs");
                 }
             }
 
