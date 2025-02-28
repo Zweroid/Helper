@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrudWelcomeAndroid {
+public class CrudPageUserInfo {
 
     public static boolean addUserInfo(int sceneNumber, String sceneName, String title, String content) {
         String sql = "INSERT INTO user_info(scene_number, scene_name, title, content) VALUES(?, ?, ?, ?)";
@@ -66,7 +66,7 @@ public class CrudWelcomeAndroid {
         }
     }
 
-    public ListDataProvider<BdUserinfo> printUserInfo() {
+    public ListDataProvider<DbUserInfo> printUserInfo() {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -81,7 +81,7 @@ public class CrudWelcomeAndroid {
             resultSet = statement.executeQuery();
 
             // Используем createTransactionList для преобразования ResultSet в список BdUserinfo
-            List<BdUserinfo> userInfoList = createTransactionList(resultSet);
+            List<DbUserInfo> userInfoList = createTransactionList(resultSet);
 
             // Возвращаем ListDataProvider с данными
             return new ListDataProvider<>(userInfoList);
@@ -99,8 +99,8 @@ public class CrudWelcomeAndroid {
 
 
 
-    private List<BdUserinfo> createTransactionList(ResultSet resultSet) throws SQLException {
-    List<BdUserinfo> transactionsList = new ArrayList<>();
+    private List<DbUserInfo> createTransactionList(ResultSet resultSet) throws SQLException {
+    List<DbUserInfo> transactionsList = new ArrayList<>();
         while (resultSet.next()) {
               int id = resultSet.getInt("ID");;
               int  sceneNumber = resultSet.getInt("scene_number");;
@@ -108,7 +108,7 @@ public class CrudWelcomeAndroid {
           String  title = resultSet.getString("title");;
           String  content = resultSet.getString("content");;
 
-            BdUserinfo userinfo= new BdUserinfo(id,sceneNumber,sceneName,title,content);
+            DbUserInfo userinfo= new DbUserInfo(id,sceneNumber,sceneName,title,content);
             transactionsList.add(userinfo);
         }
         return transactionsList;

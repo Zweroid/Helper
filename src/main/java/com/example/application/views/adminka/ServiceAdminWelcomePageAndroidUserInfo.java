@@ -1,7 +1,7 @@
 package com.example.application.views.adminka;
 
-import com.example.application.databaseService.BdUserinfo;
-import com.example.application.databaseService.CrudWelcomeAndroid;
+import com.example.application.databaseService.DbUserInfo;
+import com.example.application.databaseService.CrudPageUserInfo;
 import com.example.application.security.Roles;
 import com.example.application.views.HomeView;
 import com.vaadin.flow.component.button.Button;
@@ -25,8 +25,8 @@ import java.util.Collections;
 @RolesAllowed(Roles.ADMIN)
 public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     private boolean isFormEditOpen = false;
-    CrudWelcomeAndroid welcomeAndroid = new CrudWelcomeAndroid();
-    private final Grid<BdUserinfo> grid = new Grid<>();
+    CrudPageUserInfo welcomeAndroid = new CrudPageUserInfo();
+    private final Grid<DbUserInfo> grid = new Grid<>();
 
     //Todo слой в котором кнопки создать, редактировать, удалить
     HorizontalLayout buttonLayout = new HorizontalLayout();
@@ -59,12 +59,12 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
     }
 
-    private Grid<BdUserinfo> createGridUserInfo() {
+    private Grid<DbUserInfo> createGridUserInfo() {
         grid.setItems(welcomeAndroid.printUserInfo());
-        grid.addColumn(BdUserinfo::getScene_number).setHeader("Номер сцены");
-        grid.addColumn(BdUserinfo::getScene_name).setHeader("Тип сцены");
-        grid.addColumn(BdUserinfo::getTitle).setHeader("Заголовок");
-        grid.addColumn(BdUserinfo::getContent).setHeader("Содержание");
+        grid.addColumn(DbUserInfo::getScene_number).setHeader("Номер сцены");
+        grid.addColumn(DbUserInfo::getScene_name).setHeader("Тип сцены");
+        grid.addColumn(DbUserInfo::getTitle).setHeader("Заголовок");
+        grid.addColumn(DbUserInfo::getContent).setHeader("Содержание");
 
         grid.addSelectionListener(selection -> {
             selection.getFirstSelectedItem().ifPresent(selectedItem -> {
@@ -147,7 +147,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
             Notification.show("Заполните все поля").setPosition(Notification.Position.TOP_CENTER);
             return;
         } else {
-            CrudWelcomeAndroid.addUserInfo(scene_number, scene_name, title, content);
+            CrudPageUserInfo.addUserInfo(scene_number, scene_name, title, content);
 
             exitLoyalCreate();
             updateGrid();
@@ -237,7 +237,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
     private void buttonEdit(int numberSceneValue,String typeSceneValue,String titleSceneValue,String contentValue) {
 
-        CrudWelcomeAndroid.editUserInfo(numberSceneValue,typeSceneValue,titleSceneValue,contentValue);
+        CrudPageUserInfo.editUserInfo(numberSceneValue,typeSceneValue,titleSceneValue,contentValue);
 
          exitLoyalEdit();
          updateGrid();
@@ -319,7 +319,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
 
     private void buttonDelete(int number) {
-        CrudWelcomeAndroid.deleteUserInfo(number);
+        CrudPageUserInfo.deleteUserInfo(number);
 
         exitLoyalDelete();
         updateGrid();
@@ -350,7 +350,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
     private void updateGrid() {
         // Получаем обновленные данные из источника
-        ListDataProvider<BdUserinfo> dataProvider = welcomeAndroid.printUserInfo();
+        ListDataProvider<DbUserInfo> dataProvider = welcomeAndroid.printUserInfo();
 
         if (dataProvider != null) {
             // Устанавливаем новые данные в Grid

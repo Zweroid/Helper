@@ -1,6 +1,6 @@
 package com.example.application.databaseService;
 
-public class BdUserinfo {
+public class DbUserInfo {
 
     private int id;
     private int scene_number;
@@ -8,7 +8,7 @@ public class BdUserinfo {
     private String title;
     private String content;
 
-    public BdUserinfo(int id, int sceneNumber, String sceneName, String title, String content) {
+    public DbUserInfo(int id, int sceneNumber, String sceneName, String title, String content) {
         this.id = id;
         this.scene_number = sceneNumber;
         this.scene_name = sceneName;
