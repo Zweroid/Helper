@@ -63,7 +63,15 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
         grid.addSelectionListener(selection -> {
             selection.getFirstSelectedItem().ifPresent(selectedItem -> {
                 int id = selectedItem.getId(); // Получаем ID выбранной записи
-                System.out.println("Выбранный ID: " + id); // Выводим ID в консоль
+
+                int numberScene = selectedItem.getScene_number();
+                String typeScene =selectedItem.getScene_name();
+                String titleScene =selectedItem.getTitle();
+                String content = selectedItem.getContent();
+
+                formEdit(numberScene,typeScene,titleScene,content);
+
+             //   System.out.println("Выбранный ID: " + id); // Выводим ID в консоль
             });
         });
 
@@ -135,22 +143,6 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
     }
 
 
-    private void updateGrid() {
-        // Получаем обновленные данные из источника
-        ListDataProvider<BdUserinfo> dataProvider = welcomeAndroid.printUserInfo();
-
-        if (dataProvider != null) {
-            // Устанавливаем новые данные в Grid
-            grid.setItems(dataProvider.getItems());
-        } else {
-            // Если данные отсутствуют, очищаем Grid
-            grid.setItems(Collections.emptyList());
-        }
-    }
-
-
-
-
 
     //todo ======================Редактирование =================================================
 
@@ -159,7 +151,6 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
 
     }
 
-
     private void formEdit() {
         exitLoyalCreate();
         exitLoyalEdit();
@@ -167,7 +158,7 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
         TextField typeScene = new TextField("Тип сцены");
         TextField titleScene = new TextField("Заголовок");
         TextArea content = new TextArea("Содержание");
-        Button create = new Button("Редактировать", event -> buttonEdit());
+        Button create = new Button("Редактировать");
         create.addThemeVariants(ButtonVariant.LUMO_PRIMARY,
                 ButtonVariant.LUMO_CONTRAST);
 
@@ -190,7 +181,48 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
     }
 
 
-    private void buttonEdit() {
+
+
+    private void formEdit(int numberSceneValue,String typeSceneValue,String titleSceneValue,String contentValue) {
+        exitLoyalCreate();
+        exitLoyalEdit();
+        TextField numberScene = new TextField("Номер сцены");
+                  numberScene.setValue(String.valueOf(numberSceneValue));
+        TextField typeScene = new TextField("Тип сцены");
+        typeScene.setValue(typeSceneValue);
+        TextField titleScene = new TextField("Заголовок");
+        titleScene.setValue(titleSceneValue);
+        TextArea content = new TextArea("Содержание");
+        content.setValue(contentValue);
+        Button create = new Button("Редактировать", event -> buttonEdit(Integer.parseInt(numberScene.getValue()),typeScene.getValue(),titleScene.getValue(),content.getValue()));
+        create.addThemeVariants(ButtonVariant.LUMO_PRIMARY,
+                ButtonVariant.LUMO_CONTRAST);
+
+        Button cancel = new Button("Закрыть", e -> exitLoyalEdit());
+        cancel.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        buttonEditCancel.add(cancel, create);
+        formLayoutEdit.add(numberScene, typeScene, titleScene, content);
+        formLayoutEdit.setColspan(numberScene, 1); // Занимает все 2 колонки
+        formLayoutEdit.setColspan(typeScene, 1);   // Занимает 1 колонку (50%)
+        formLayoutEdit.setColspan(titleScene, 3);  // Занимает 1 колонку (50%)
+        formLayoutEdit.setColspan(content, 8);     // Занимает все 2 колонки
+
+        // Настройка адаптивных шагов
+        formLayoutEdit.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1),   // При ширине <500px: 1 колонка
+                new FormLayout.ResponsiveStep("500px", 8) // При ширине >=500px: 2 колонки
+        );
+        add(formLayoutEdit, buttonEditCancel);
+
+    }
+
+
+    private void buttonEdit(int numberSceneValue,String typeSceneValue,String titleSceneValue,String contentValue) {
+
+        CrudWelcomeAndroid.editUserInfo(numberSceneValue,typeSceneValue,titleSceneValue,contentValue);
+
+         exitLoyalEdit();
+         updateGrid();
 
 
     }
@@ -203,6 +235,19 @@ public class ServiseAdminWelcomePageAndroid extends VerticalLayout {
     private void exitLoyalCreate() {
         formLayoutCreate.removeAll();
         buttonCreateCancel.removeAll();
+    }
+
+    private void updateGrid() {
+        // Получаем обновленные данные из источника
+        ListDataProvider<BdUserinfo> dataProvider = welcomeAndroid.printUserInfo();
+
+        if (dataProvider != null) {
+            // Устанавливаем новые данные в Grid
+            grid.setItems(dataProvider.getItems());
+        } else {
+            // Если данные отсутствуют, очищаем Grid
+            grid.setItems(Collections.emptyList());
+        }
     }
 
 

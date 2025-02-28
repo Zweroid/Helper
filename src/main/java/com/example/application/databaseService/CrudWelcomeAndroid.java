@@ -33,13 +33,18 @@ public class CrudWelcomeAndroid {
 
     public static boolean editUserInfo(int sceneNumber, String sceneName, String title, String content) {
         String sql = "UPDATE user_info SET scene_name = ?, title = ?, content = ? WHERE scene_number = ?";
+        //UPDATE user_info SET scene_name = "text", title = "22222222", content = "33333333" WHERE scene_number = 1
         try (Connection conn = DatabaseHelper.connect();
+
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, sceneName);
             pstmt.setString(2, title);
             pstmt.setString(3, content);
             pstmt.setInt(4, sceneNumber);
             pstmt.executeUpdate();
+
+            Notification.show("Вы успешно отредактировали запись в базе данных").setPosition(Notification.Position.TOP_CENTER);
             return true;
         } catch (SQLException e) {
             System.out.println("Ошибка при редактировании записи в user_info: " + e.getMessage());
