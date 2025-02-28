@@ -41,21 +41,26 @@ public class AndroidViewWelcomePage extends VerticalLayout {
 
             // Создаем основной контейнер для компонентов
             VerticalLayout layout = new VerticalLayout();
+            layout.setSpacing(false);
 
 
 
             // Обрабатываем каждую сцену
             for (SceneInfoView scene : scenes) {
                 if ("text".equals(scene.getSceneName())) {
+                    layout.setSpacing(false);
+                    layout.setPadding(false);
+                    layout.getThemeList().add("spacing-xs");
                     layout.add(createTextArea(scene));
-                    layout.setSpacing(false);
-                    layout.setPadding(false);
-                    layout.getThemeList().add("spacing-xs");
+
+
                 } else if ("photo".equals(scene.getSceneName())) {
-                    layout.add(createPhotoGallery(scene));
                     layout.setSpacing(false);
                     layout.setPadding(false);
                     layout.getThemeList().add("spacing-xs");
+                    layout.add(createPhotoGallery(scene));
+
+
                 }
             }
 

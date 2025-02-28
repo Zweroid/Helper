@@ -104,7 +104,7 @@ public class HomeView extends AppLayout {
 
             admin.setLabel("Админ");
             admin.setCollapsible(true);
-            admin.addItem(new SideNavItem("Страница Welcome","/serviceWelcomeUserInfo"));
+            admin.addItem(new SideNavItem("Page SendUser","/serviceWelcomeUserInfo"),new SideNavItem("Page SendPhoto","/serviceWelcomePhoto"));
 
             return Arrays.asList(userAndroid,userPC,admin);
 
