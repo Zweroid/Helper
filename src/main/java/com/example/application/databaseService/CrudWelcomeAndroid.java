@@ -58,6 +58,7 @@ public class CrudWelcomeAndroid {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, sceneNumber);
             pstmt.executeUpdate();
+            Notification.show("Вы успешно удалили запись в базе данных").setPosition(Notification.Position.TOP_CENTER);
             return true;
         } catch (SQLException e) {
             System.out.println("Ошибка при удалении записи из user_info: " + e.getMessage());
