@@ -86,7 +86,7 @@ public class HomeView extends AppLayout {
         UI.getCurrent().getPage().retrieveExtendedClientDetails(details -> {
             // This is your own method that you may do something with the screen width.
             // Note that this method runs asynchronously
-            Notification.show("Ширина " + details.getScreenWidth() + " Высота " + details.getScreenHeight());
+            Notification.show("Ширина " + details.getScreenWidth() + " Высота " + details.getScreenHeight()).setPosition(Notification.Position.TOP_CENTER);
         });
     }
 
