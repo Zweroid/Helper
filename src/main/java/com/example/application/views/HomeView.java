@@ -36,6 +36,8 @@ import java.util.List;
 @PermitAll
 
 public class HomeView extends AppLayout {
+
+
     private final SecurityService securityService;
     LogotipSite components = new LogotipSite();
     HorizontalLayout header = new HorizontalLayout();
