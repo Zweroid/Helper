@@ -4,6 +4,7 @@ import com.example.application.components.LogotipSite;
 import com.example.application.security.Roles;
 import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -15,8 +16,10 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinRequest;
@@ -24,11 +27,9 @@ import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+
 
 @Route("")
 @PageTitle("HelpMax")
@@ -43,10 +44,12 @@ public class HomeView extends AppLayout {
     Button checkDeviceButton = new Button("Проверить устройство", event -> chekAndroid());
 
 
-    public HomeView(SecurityService securityService,AuthenticationContext authenticationContext) {
+    public HomeView(SecurityService securityService, AuthenticationContext authenticationContext) {
 
 
 
+
+        Button sizeScreen = new Button("Получить размер", event -> buttonSize());
 
         checkDeviceButton.addThemeVariants(ButtonVariant.LUMO_SMALL);
         agreementText.setVisible(false);
@@ -67,18 +70,26 @@ public class HomeView extends AppLayout {
         header.setWidth("100%");
         header.setAlignItems(FlexComponent.Alignment.CENTER);
         header.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.add(toggle, components.logotipSite(), logout, agreementText,checkDeviceButton);
+        header.add(toggle, components.logotipSite(), logout, agreementText, checkDeviceButton,sizeScreen);
         addToNavbar(header);
         addToDrawer(navContainer);
         setContent(agreement());
-
-
 
 
         checkAgreementStatus();
 
 
     }
+
+    private void buttonSize() {
+
+        UI.getCurrent().getPage().retrieveExtendedClientDetails(details -> {
+            // This is your own method that you may do something with the screen width.
+            // Note that this method runs asynchronously
+            Notification.show("Ширина " + details.getScreenWidth() + " Высота " + details.getScreenHeight());
+        });
+    }
+
 
 
 
@@ -96,32 +107,29 @@ public class HomeView extends AppLayout {
 
             userPC.setLabel("Computer");
             userPC.setCollapsible(true);
-            userPC.addItem(new SideNavItem("Установка Windows","/osWindows"));
-
-
-
+            userPC.addItem(new SideNavItem("Установка Windows", "/osWindows"));
 
 
             admin.setLabel("Админ");
             admin.setCollapsible(true);
-            admin.addItem(new SideNavItem("Page SendUser","/serviceWelcomeUserInfo"),new SideNavItem("Page SendPhoto","/serviceWelcomePhoto"));
+            admin.addItem(new SideNavItem("Page SendUser", "/serviceWelcomeUserInfo"), new SideNavItem("Page SendPhoto", "/serviceWelcomePhoto"));
 
-            return Arrays.asList(userAndroid,userPC,admin);
+            return Arrays.asList(userAndroid, userPC, admin);
 
 
-        }else {
+        } else {
             userAndroid.setLabel("Android TV");
             userAndroid.setCollapsible(true);
             userAndroid.addItem(new SideNavItem("Приветствие", "/androidWelcomePage"));
 
             userPC.setLabel("Computer");
             userPC.setCollapsible(true);
-            userPC.addItem(new SideNavItem("Установка Windows","/osWindows"));
+            userPC.addItem(new SideNavItem("Установка Windows", "/osWindows"));
 
 
         }
 
-        return Arrays.asList(userAndroid,userPC);
+        return Arrays.asList(userAndroid, userPC);
     }
 
     private void checkAgreementStatus() {
@@ -211,7 +219,8 @@ public class HomeView extends AppLayout {
 
         } else {
 
-            Notification.show("Это не Android устройство").setPosition(Notification.Position.BOTTOM_CENTER);;
+            Notification.show("Это не Android устройство").setPosition(Notification.Position.BOTTOM_CENTER);
+            ;
         }
     }
 
