@@ -79,6 +79,7 @@ public class AndroidViewWelcomePage extends VerticalLayout {
 
     private VerticalLayout createTextArea(SceneInfoView sceneInfoView) {
         VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.setClassName("title-component-divs");
         Div general = new Div();
         general.addClassName("general-present");
         Div title = new Div();

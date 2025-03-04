@@ -12,14 +12,15 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.component.page.Page;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
-import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinRequest;
@@ -40,7 +41,9 @@ public class HomeView extends AppLayout {
 
     private final SecurityService securityService;
     LogotipSite components = new LogotipSite();
-    HorizontalLayout header = new HorizontalLayout();
+
+    HorizontalLayout headerToggleAndLogotip = new HorizontalLayout();
+    HorizontalLayout headerLogout = new HorizontalLayout();
     H6 agreementText = new H6("Соглашение принято");
     HorizontalLayout present = new HorizontalLayout();
     Button checkDeviceButton = new Button("Проверить устройство", event -> chekAndroid());
@@ -56,7 +59,8 @@ public class HomeView extends AppLayout {
         checkDeviceButton.addThemeVariants(ButtonVariant.LUMO_SMALL);
         agreementText.setVisible(false);
         this.securityService = securityService;
-        Button logout = new Button("Выход", e -> securityService.logout());
+        Button logout = new Button("Exit",new Icon(VaadinIcon.EXIT_O), e -> securityService.logout());
+        logout.getStyle().set("margin-right","20px");
         logout.addThemeVariants(ButtonVariant.LUMO_SMALL);
         DrawerToggle toggle = new DrawerToggle();
         List<SideNav> sideNavs = getSideNav(authenticationContext);
@@ -69,11 +73,16 @@ public class HomeView extends AppLayout {
         }
 
 
-        header.setWidth("100%");
-        header.setAlignItems(FlexComponent.Alignment.CENTER);
-        header.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.add(toggle, components.logotipSite(), logout, agreementText, checkDeviceButton,sizeScreen);
-        addToNavbar(header);
+        headerToggleAndLogotip.setWidth("100%");
+        headerToggleAndLogotip.setAlignItems(FlexComponent.Alignment.CENTER);
+        headerToggleAndLogotip.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        headerToggleAndLogotip.add(toggle, components.logotipSite());
+
+        headerLogout.setWidth("100%");
+        headerLogout.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+        headerLogout.add(logout);
+
+        addToNavbar(headerToggleAndLogotip,headerLogout);
         addToDrawer(navContainer);
         setContent(agreement());
 

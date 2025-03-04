@@ -1,29 +1,27 @@
 
 /* Для мобильных устройств */
 @media (max-width: 600px) {
-    .my-component {
-        font-size: 14px;
-        padding: 10px;
-    }
+
 }
 
 /* Для планшетов */
-@media (min-width: 601px) and (max-width: 900px) {
-    .my-component {
-        font-size: 18px;
-        padding: 20px;
-    }
+@media (min-width: 601px) and (max-width: 960px) {
+h5 {
+    font-size: 12px;
+}
+
+
 }
 
 /* Для десктопов */
-@media (min-width: 901px) {
-    .my-component {
-        font-size: 22px;
-        padding: 30px;
-    }
+@media (min-width: 961px) {
+
+
+
 }
 /* цвет хидара */
 vaadin-app-layout::part(navbar){
+
 
 }
 /* диалоговое окно информация */
@@ -96,25 +94,26 @@ font-size: 8px;
     width: 100%; /* Обеспечиваем, что общий контейнер занимает всю ширину */
     display: flex;
     flex-direction: column; /* Размещаем дочерние элементы вертикально */
+
 }
 
 
 .title-present {
 
-padding-bottom: 1px;
+
 font-size: 15px;
 
 
+
 }
 
 .component-present {
-font-size: 14px;
-}
-
-.component-present {
+    font-size: 14px;
     padding: 10px; /* Добавляем отступы для лучшего визуального восприятия */
     background-color: #37485F; /* Опциональный фон */
     border-radius: 4px; /* Опциональные скругленные углы */
+    padding: 4px;
+
 
 }
 
@@ -131,4 +130,9 @@ font-size: 15px;
 vaadin-side-nav-item{
 font-size: 14px;
 
+}
+
+.title-component-divs{
+padding-top:5px;
+padding-bottom:1px;
 }
