@@ -50,7 +50,9 @@ public class PresentInfoToJson {
                     JSONArray photosArray = new JSONArray();
                     while (rsPhotos.next()) {
                         // Убираем лишние обратные слеши
-                        String photoPath = rsPhotos.getString("photo_path").replace("\\", "/");
+                        System.out.println(rsPhotos.getString("photo_path").trim());
+                        String photoPath = rsPhotos.getString("photo_path").replace("\\", "/").trim();
+
                         photosArray.put(photoPath);
                     }
 

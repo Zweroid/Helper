@@ -33,7 +33,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     Button buttonCreateButtonLayout = new Button("Создать запись", e -> buttonCreateForms());
 
     Button buttonEditButtonLayout = new Button("Редактировать запись", e -> buttonEditForms());
-    Button buttonDeleteButtonLayout = new Button("Удалить запись", e-> buttonDeleteForms());
+    Button buttonDeleteButtonLayout = new Button("Удалить запись", e -> buttonDeleteForms());
 
     //=============================== Создание записи=====================================
     //Todo форма с полями для создания
@@ -49,7 +49,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     //=============================== Удаление записи =====================================
 
     //Todo форма с полями для удаления
-    FormLayout formLayoutDelete= new FormLayout();
+    FormLayout formLayoutDelete = new FormLayout();
     //Todo слой где кнопка создать и закрыть в редактировании
     HorizontalLayout buttonDeleteCancel = new HorizontalLayout();
 
@@ -71,8 +71,8 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
                 int id = selectedItem.getId(); // Получаем ID выбранной записи
 
                 int numberScene = selectedItem.getScene_number();
-                String typeScene =selectedItem.getScene_name();
-                String titleScene =selectedItem.getTitle();
+                String typeScene = selectedItem.getScene_name();
+                String titleScene = selectedItem.getTitle();
                 String content = selectedItem.getContent();
                 // Проверяем состояние флага и выполняем соответствующее действие
                 if (isFormEditOpen) {
@@ -83,7 +83,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
                     formDelete(numberScene);
                 }
 
-             //   System.out.println("Выбранный ID: " + id); // Выводим ID в консоль
+                //   System.out.println("Выбранный ID: " + id); // Выводим ID в консоль
             });
         });
 
@@ -95,6 +95,15 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
 
     private void buttonCreateForms() {
+
+        removeAll();
+        grid.removeAllColumns();
+        buttonLayout.add(buttonCreateButtonLayout, buttonEditButtonLayout, buttonDeleteButtonLayout);
+        add(createGridUserInfo(), buttonLayout);
+        exitLoyalCreate();
+        exitLoyalEdit();
+        exitLoyalDelete();
+
         formCreate();
 
     }
@@ -102,9 +111,6 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
     private void formCreate() {
 
-        exitLoyalCreate();
-        exitLoyalEdit();
-        exitLoyalDelete();
 
         TextField numberScene = new TextField("Номер сцены");
         TextField typeScene = new TextField("Тип сцены");
@@ -113,7 +119,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
         TextArea content = new TextArea("Содержание");
         Button create = new Button("Создать", e -> {
 
-            if (numberScene.isEmpty() || titleScene.isEmpty() || titleScene.isEmpty() || content.isEmpty()) {
+            if (numberScene.isEmpty() || titleScene.isEmpty() || titleScene.isEmpty()) {
 
                 Notification.show("Заполните все поля").setPosition(Notification.Position.TOP_CENTER);
             } else {
@@ -143,7 +149,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
 
     private void buttonCreate(int scene_number, String scene_name, String title, String content) {
 
-        if (scene_number < 0 || scene_name.isEmpty() || title.isEmpty() || content.isEmpty()) {
+        if (scene_number < 0 || scene_name.isEmpty() || title.isEmpty()) {
             Notification.show("Заполните все поля").setPosition(Notification.Position.TOP_CENTER);
             return;
         } else {
@@ -157,18 +163,22 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     }
 
 
-
     //todo ======================Редактирование =================================================
 
     private void buttonEditForms() {
+        removeAll();
+        grid.removeAllColumns();
+        buttonLayout.add(buttonCreateButtonLayout, buttonEditButtonLayout, buttonDeleteButtonLayout);
+        add(createGridUserInfo(), buttonLayout);
+        exitLoyalCreate();
+        exitLoyalEdit();
+        exitLoyalDelete();
+
         formEdit();
 
     }
 
     private void formEdit() {
-        exitLoyalCreate();
-        exitLoyalEdit();
-        exitLoyalDelete();
         isFormEditOpen = true;
         TextField numberScene = new TextField("Номер сцены");
         TextField typeScene = new TextField("Тип сцены");
@@ -197,22 +207,25 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     }
 
 
-
-
-    private void formEdit(int numberSceneValue,String typeSceneValue,String titleSceneValue,String contentValue) {
+    private void formEdit(int numberSceneValue, String typeSceneValue, String titleSceneValue, String contentValue) {
+        removeAll();
+        grid.removeAllColumns();
+        buttonLayout.add(buttonCreateButtonLayout, buttonEditButtonLayout, buttonDeleteButtonLayout);
+        add(createGridUserInfo(), buttonLayout);
         exitLoyalCreate();
         exitLoyalEdit();
         exitLoyalDelete();
+
         isFormEditOpen = true;
         TextField numberScene = new TextField("Номер сцены");
-                  numberScene.setValue(String.valueOf(numberSceneValue));
+        numberScene.setValue(String.valueOf(numberSceneValue));
         TextField typeScene = new TextField("Тип сцены");
         typeScene.setValue(typeSceneValue);
         TextField titleScene = new TextField("Заголовок");
         titleScene.setValue(titleSceneValue);
         TextArea content = new TextArea("Содержание");
         content.setValue(contentValue);
-        Button create = new Button("Редактировать", event -> buttonEdit(Integer.parseInt(numberScene.getValue()),typeScene.getValue(),titleScene.getValue(),content.getValue()));
+        Button create = new Button("Редактировать", event -> buttonEdit(Integer.parseInt(numberScene.getValue()), typeScene.getValue(), titleScene.getValue(), content.getValue()));
         create.addThemeVariants(ButtonVariant.LUMO_PRIMARY,
                 ButtonVariant.LUMO_CONTRAST);
 
@@ -235,32 +248,36 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     }
 
 
-    private void buttonEdit(int numberSceneValue,String typeSceneValue,String titleSceneValue,String contentValue) {
+    private void buttonEdit(int numberSceneValue, String typeSceneValue, String titleSceneValue, String contentValue) {
 
-        CrudPageUserInfo.editUserInfo(numberSceneValue,typeSceneValue,titleSceneValue,contentValue);
+        CrudPageUserInfo.editUserInfo(numberSceneValue, typeSceneValue, titleSceneValue, contentValue);
 
-         exitLoyalEdit();
-         updateGrid();
+        exitLoyalEdit();
+        updateGrid();
 
 
     }
-
 
 
     //TODO=============================== Удаление записи ============================================================
 
 
     private void buttonDeleteForms() {
+        removeAll();
+        grid.removeAllColumns();
+        buttonLayout.add(buttonCreateButtonLayout, buttonEditButtonLayout, buttonDeleteButtonLayout);
+        add(createGridUserInfo(), buttonLayout);
+        exitLoyalCreate();
+        exitLoyalEdit();
+        exitLoyalDelete();
+
         formDelete();
 
 
     }
 
-    private void formDelete () {
+    private void formDelete() {
 
-        exitLoyalCreate();
-        exitLoyalEdit();
-        exitLoyalDelete();
         isFormEditOpen = false;
         TextField numberScene = new TextField("Номер сцены");
         Button delete = new Button("Удалить");
@@ -281,13 +298,10 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
         add(formLayoutDelete, buttonDeleteCancel);
 
 
-
-
     }
 
 
-
-    private void formDelete (int number) {
+    private void formDelete(int number) {
 
         exitLoyalCreate();
         exitLoyalEdit();
@@ -295,7 +309,7 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
         isFormEditOpen = false;
         TextField numberScene = new TextField("Номер сцены");
         numberScene.setValue(String.valueOf(number));
-        Button delete = new Button("Удалить",e-> buttonDelete(Integer.parseInt(numberScene.getValue())));
+        Button delete = new Button("Удалить", e -> buttonDelete(Integer.parseInt(numberScene.getValue())));
         delete.addThemeVariants(ButtonVariant.LUMO_PRIMARY,
                 ButtonVariant.LUMO_CONTRAST);
 
@@ -313,8 +327,6 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
         add(formLayoutDelete, buttonDeleteCancel);
 
 
-
-
     }
 
 
@@ -327,25 +339,23 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
     }
 
 
-
     private void exitLoyalEdit() {
         formLayoutEdit.removeAll();
         buttonEditCancel.removeAll();
 
     }
+
     private void exitLoyalCreate() {
         formLayoutCreate.removeAll();
         buttonCreateCancel.removeAll();
     }
 
-    private void exitLoyalDelete () {
+    private void exitLoyalDelete() {
         formLayoutDelete.removeAll();
         buttonDeleteCancel.removeAll();
 
 
-
     }
-
 
 
     private void updateGrid() {
@@ -360,9 +370,6 @@ public class ServiceAdminWelcomePageAndroidUserInfo extends VerticalLayout {
             grid.setItems(Collections.emptyList());
         }
     }
-
-
-
 
 
 }

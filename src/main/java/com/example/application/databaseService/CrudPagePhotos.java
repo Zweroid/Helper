@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrudPagePhoto {
+public class CrudPagePhotos {
 
     public static boolean addPhotos(int scene_number,String photo_path) {
         String sql = "INSERT INTO photos(scene_number, photo_path) VALUES(?, ?)";
@@ -29,8 +29,8 @@ public class CrudPagePhoto {
         }
     }
 
-    public static boolean editPgotos(int scene_number,String photo_path) {
-        String sql = "UPDATE photos SET scene_number = ?, photo_path = ?";
+    public static boolean editPgotos(int id,int scene_number,String photo_path) {
+        String sql = "UPDATE photos SET scene_number = ?, photo_path = ? where id = ?" ;
 
         try (Connection conn = DatabaseHelper.connect();
 
@@ -38,6 +38,7 @@ public class CrudPagePhoto {
 
             pstmt.setInt(1, scene_number);
             pstmt.setString(2, photo_path);
+            pstmt.setInt(3,id);
 
             pstmt.executeUpdate();
 
@@ -49,11 +50,11 @@ public class CrudPagePhoto {
         }
     }
 
-    public static boolean deletePhotos(int scene_number) {
-        String sql = "DELETE FROM photos WHERE scene_number = ?";
+    public static boolean deletePhotos(int id) {
+        String sql = "DELETE FROM photos WHERE id = ?";
         try (Connection conn = DatabaseHelper.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, scene_number);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             Notification.show("Вы успешно удалили запись в базе данных").setPosition(Notification.Position.TOP_CENTER);
             return true;
@@ -74,7 +75,7 @@ public class CrudPagePhoto {
             // Получаем соединение с базой данных
             connection = DatabaseHelper.connect();
             // SQL-запрос для выборки всех записей из таблицы
-            String query = "SELECT id, scene_number,photo_path";
+            String query = "SELECT id, scene_number,photo_path FROM photos";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
 

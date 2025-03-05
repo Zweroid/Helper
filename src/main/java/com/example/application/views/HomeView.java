@@ -18,7 +18,6 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
@@ -195,6 +194,8 @@ public class HomeView extends AppLayout {
                     <p>Нажимая "Принять", вы принимаете все вышеуказанные условия.</p>
                 </div>
                 """);
+
+
 
         dialog.setText(content);
         dialog.setCancelable(true);
